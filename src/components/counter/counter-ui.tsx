@@ -1,8 +1,8 @@
 import { Keypair, PublicKey } from '@solana/web3.js'
 import { useMemo } from 'react'
-import { ExplorerLink } from '../cluster/cluster-ui'
 import { ellipsify } from '../ui/ui-layout'
 import { useCounterProgram, useCounterProgramAccount } from './counter-data-access'
+import { ExplorerLink } from '@/components/solana/explorer-link.tsx'
 
 export function CounterCreate() {
   const { initialize } = useCounterProgram()

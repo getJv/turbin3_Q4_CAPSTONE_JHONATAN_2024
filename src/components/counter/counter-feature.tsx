@@ -1,9 +1,9 @@
 import { useWallet } from '@solana/wallet-adapter-react'
-import { ExplorerLink } from '../cluster/cluster-ui'
 import { WalletButton } from '../solana/solana-provider'
-import { AppHero, ellipsify } from '../ui/ui-layout'
+import { ellipsify } from '../ui/ui-layout'
 import { useCounterProgram } from './counter-data-access'
 import { CounterCreate, CounterList } from './counter-ui'
+import { ExplorerLink } from '@/components/solana/explorer-link.tsx'
 
 export default function CounterFeature() {
   const { publicKey } = useWallet()
@@ -11,17 +11,10 @@ export default function CounterFeature() {
 
   return publicKey ? (
     <div>
-      <AppHero
-        title="Counter"
-        subtitle={
-          'Create a new account by clicking the "Create" button. The state of a account is stored on-chain and can be manipulated by calling the program\'s methods (increment, decrement, set, and close).'
-        }
-      >
-        <p className="mb-6">
-          <ExplorerLink path={`account/${programId}`} label={ellipsify(programId.toString())} />
-        </p>
-        <CounterCreate />
-      </AppHero>
+      <p className="mb-6">
+        <ExplorerLink path={`account/${programId}`} label={ellipsify(programId.toString())} />
+      </p>
+      <CounterCreate />
       <CounterList />
     </div>
   ) : (

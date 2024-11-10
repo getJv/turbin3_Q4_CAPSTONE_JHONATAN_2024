@@ -1,52 +1,36 @@
-# React + TypeScript + Vite
+# Solana Minesweeper
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Solana Minesweeper brings the classic, beloved Windows Minesweeper into the
+future, now powered by Solana blockchain. 
 
-Currently, two official plugins are available:
+Just like the arcade days, players will need to "insert a coin" to begin each match. 
+Every player’s actions and high scores are securely stored on the blockchain, adding a layer of transparency and
+trust. 
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+In the upcoming update, the game will introduce a multiplayer cooperative
+mode, allowing players to team up and increase the excitement and interaction.
+Get ready for a new era of Minesweeper, where tradition meets cutting-edge
+technology!
 
-## Expanding the ESLint configuration
+## Architecture
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+- TODO
 
-- Configure the top-level `parserOptions` property like this:
+## Development environment
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+### Starting local dev-server
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+1. Checkout the project and go to project root folder
+2. install the js dependencies `yarn install`
+3. use `yarn dev` to start your dev server. 
+4. Access http://localhost:5173/ the system should be on.
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
+### Deploying on dev.net
 
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
-```
+1. Go to anchor folder. 
+2. Sync your keys using  `anchor keys sync`
+3. build the anchor project with: `cargo build-sbf && anchor build`
+4. Deploy on devnet with: `anchor deploy --provider.cluster devnet`
 
-# template-react-vite-tailwind
+
+

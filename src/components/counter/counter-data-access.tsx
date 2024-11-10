@@ -5,7 +5,7 @@ import { useMutation, useQuery } from '@tanstack/react-query'
 
 import { useMemo } from 'react'
 import toast from 'react-hot-toast'
-import { useCluster } from '../cluster/cluster-data-access'
+import { useCluster } from '../solana/cluster-provider.tsx'
 import { useAnchorProvider } from '../solana/solana-provider'
 import { useTransactionToast } from '../ui/ui-layout'
 
