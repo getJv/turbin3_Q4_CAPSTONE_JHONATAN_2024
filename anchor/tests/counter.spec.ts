@@ -52,7 +52,7 @@ describe('counter', () => {
     expect(currentCount.count).toEqual(1)
   })
 
-  it('Set counter value', async () => {
+  it('Set minesweeper value', async () => {
     await program.methods.set(42).accounts({ counter: counterKeypair.publicKey }).rpc()
 
     const currentCount = await program.account.counter.fetch(counterKeypair.publicKey)
@@ -60,7 +60,7 @@ describe('counter', () => {
     expect(currentCount.count).toEqual(42)
   })
 
-  it('Set close the counter account', async () => {
+  it('Set close the minesweeper account', async () => {
     await program.methods
       .close()
       .accounts({
