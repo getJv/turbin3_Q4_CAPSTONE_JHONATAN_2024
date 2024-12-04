@@ -1,40 +1,30 @@
-import { useRef } from 'react'
-import { useTile } from '@/components/GameBoard/useTile.ts'
+import { useEffect, useRef } from 'react'
 
 interface TileProps {
-  index: number
+  id: string
+  handleClick: (event: React.MouseEvent<HTMLDivElement>, ref: React.RefObject<HTMLDivElement>) => void
+  registerTile: (tileId: string, tileRef: React.RefObject<HTMLDivElement>) => void
 }
 
-export const Tile = ({ index }: TileProps) => {
+export const Tile = (props: TileProps) => {
   const ref = useRef<HTMLDivElement>(null)
 
-  const { handleRightClick, handleMiddleClick, handleLeftClick } = useTile()
-
-  const handleTileClick = (event: React.MouseEvent<HTMLDivElement>) => {
-    // TODO: search replace for depreated func
-    const pressedBtn = event.nativeEvent.which
-
-    if (!ref.current) {
+  useEffect(() => {
+    if (ref.current) {
       return
     }
+    //props.registerTile(props.id, ref)
+  }, [ref.current])
 
-    switch (pressedBtn) {
-      case 1: {
-        handleLeftClick(ref.current)
-        return
-      }
-      case 2: {
-        handleMiddleClick(ref.current)
-        return
-      }
-      case 3: {
-        handleRightClick(ref.current)
-        return
-      }
-    }
-
-    // TODO: updateMinesCounter();
-  }
-
-  return <div id={`tile_'${index}`} ref={ref} className={'tile /*hidden*/'} onClick={handleTileClick}></div>
+  return (
+    <div
+      id={props.id}
+      ref={ref}
+      className={'tile hidden_tile'}
+      onMouseDown={(e) => props.handleClick(e, ref)}
+      onClick={(e) => e.preventDefault()}
+      onAuxClick={(e) => e.preventDefault()}
+      onContextMenu={(e) => e.preventDefault()}
+    ></div>
+  )
 }

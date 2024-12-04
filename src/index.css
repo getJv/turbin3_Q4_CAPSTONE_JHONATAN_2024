@@ -27,7 +27,7 @@ body,
     background-image: url("assets/images/clear.png");
 }
 
-.hidden {
+.hidden_tile {
     background-image: url("assets/images/hidden.png");
 }
 
