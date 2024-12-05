@@ -17,22 +17,60 @@ export const useTile = ({ toggleFlags, isTileHidden, isTileFlagged }: UseTilePro
     setTiles([...tiles])
   }
 
+  function _getNeighbors(current: HTMLDivElement) {
+    const me = current.getBoundingClientRect()
+    const midWidth = me.width / 2
+    const midHeight = me.width / 2
+
+    const leftX = me.left - midWidth
+    const leftY = me.top + midHeight
+    const left = document.elementFromPoint(leftX, leftY)
+
+    const rightX = me.right + midWidth
+    const rightY = me.top + midHeight
+    const right = document.elementFromPoint(rightX, rightY)
+
+    const topX = me.left + midWidth
+    const topY = me.top - midHeight
+    const top = document.elementFromPoint(topX, topY)
+
+    const bottomX = me.left + midWidth
+    const bottomY = me.bottom + midHeight
+    const bottom = document.elementFromPoint(bottomX, bottomY)
+
+    const topRightX = me.right + midWidth
+    const topRightY = me.top - midHeight
+    const topRight = document.elementFromPoint(topRightX, topRightY)
+
+    const topLeftX = me.left - midWidth
+    const topLeftY = me.top - midHeight
+    const topLeft = document.elementFromPoint(topLeftX, topLeftY)
+
+    const bottomLeftX = me.left - midWidth
+    const bottomLeftY = me.top + me.height
+    const bottomLeft = document.elementFromPoint(bottomLeftX, bottomLeftY)
+
+    const bottomRightX = me.right + midWidth
+    const bottomRightY = me.top + me.height
+    const bottomRight = document.elementFromPoint(bottomRightX, bottomRightY)
+
+    return [top, left, bottom, right, topLeft, bottomLeft, bottomRight, topRight]
+  }
+
   const _getTileStatuses = (current: HTMLDivElement) => {
     const isFlagged = isTileFlagged(current)
     const isHidden = isTileHidden(current)
     let isMined = false //GAME_SESSION.MINED_TILES.includes(tile.id)
     let nearMines = 0
-    let nearFlags = 0
-    /*  _getNeighbors(tile).forEach(neighbor => {
-        if (neighbor && GAME_SESSION.MINED_TILES.includes(neighbor.id)) {
-          nearMines++;
-        }
-      });
-      _getNeighbors(tile).forEach(neighbor => {
-        if (neighbor && GAME_SESSION.FLAGS_PLANTED.includes(neighbor.id)) {
-          nearFlags++;
-        }
-      });*/
+    const neighbors = _getNeighbors(current)
+
+    /*      _getNeighbors(current).forEach(neighbor => {
+            if (neighbor && GAME_SESSION.MINED_TILES.includes(neighbor.id)) {
+              nearMines++;
+            }
+          });*/
+    const nearFlags = neighbors.filter((i) => i?.classList.contains('flag')).length
+
     return { isFlagged, isHidden, isMined, nearMines, nearFlags }
   }
 
